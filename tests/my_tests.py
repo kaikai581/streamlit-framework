@@ -2,6 +2,7 @@
 
 from datetime import date, datetime
 from dotenv import load_dotenv
+from time import strptime
 import os
 import pandas as pd
 import requests
@@ -31,7 +32,7 @@ def vintage_api_request():
     response_json = response.json() # maybe redundant
 
     data = pd.DataFrame.from_dict(response_json['Time Series (Daily)'], orient= 'index').sort_index(axis=1)
-    print(data.tail()) # check OK or not
+    print(data.info()) # check OK or not
 
 if __name__ == '__main__':
     # get_all_ticker_symbols('../data/nasdaq_screener_1624404893542.csv')
@@ -40,3 +41,6 @@ if __name__ == '__main__':
 
     # try to request some data
     vintage_api_request()
+
+    # month name to number test
+    print(strptime('January','%B').tm_mon)
